@@ -15,7 +15,7 @@ graph TD
     
     %% Асинхронна комунікація через брокер повідомлень (замість прямого виклику в пам'яті)
     Auth_Service -.->|Подія: UserRegistered| Message_Broker[[RabbitMQ / Kafka]]
-    Message_Broker -.->|Споживає подію| Email_Service[Email Worker Service]
+    Message_Broker -.->|Обробляє подію| Email_Service[Email Worker Service]
     
     %% Сервіс розсилки працює незалежно
     Email_Service --> SMTP_Relay[SMTP Server / MailHog]

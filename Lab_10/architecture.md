@@ -1,3 +1,4 @@
+```mermaid
 graph TD
     %% Клієнтський рівень
     Client([Клієнтські додатки]) --> API_Gateway[API Gateway / Nginx]

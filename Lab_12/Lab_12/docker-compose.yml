@@ -1,0 +1,41 @@
+version: '3.8'
+
+services:
+  nats-server:
+    image: nats:latest
+    ports:
+      - "4222:4222"
+
+  sum-service:
+    build:
+      context: .
+      args:
+        APP_DIR: sum
+    depends_on:
+      - nats-server
+
+  square-service:
+    build:
+      context: .
+      args:
+        APP_DIR: square
+    depends_on:
+      - nats-server
+
+  filter-service:
+    build:
+      context: .
+      args:
+        APP_DIR: filter
+    depends_on:
+      - nats-server
+
+  generator-service:
+    build:
+      context: .
+      args:
+        APP_DIR: generator
+    depends_on:
+      - filter-service
+      - square-service
+      - sum-service
